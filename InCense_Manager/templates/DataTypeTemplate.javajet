@@ -1,0 +1,34 @@
+<%@ jet package="edu.incense.manager.java.emitters" imports="java.util.* edu.incense.manager.java.model.*" class="DataTypeEmitter" %>
+<%ComponentStructure component = (ComponentStructure) argument;%>
+<%Date date = new Date();%>
+ /**
+  * This class must replace the one existing in InCense Data Package
+  * It's only purpose is to maintain the list of DataTypes available
+  * Modified <%=date.toString()%>
+  */
+
+package edu.incense.android.datatask.data;
+ 
+public enum DataType {
+	NULL,
+    ACCELEROMETER,
+    AUDIO,
+    BLUETOOTH,
+    GPS, 
+    CALLS,
+    STATES,
+    WIFI,
+    BATTERY_LEVEL,
+    BOOLEAN, 
+    NFC,
+    GYROSCOPE,
+    ACCHIGHPASSFRAME,
+    ACCVECMAG,
+    STEPSCOUNTER,
+    CALORIES,
+    ACCRMS,
+    ACCACTxINACT,
+    VAD16BIT,
+    NFCTAG,
+ <%=component.getOutputType()%>
+};

@@ -1,0 +1,48 @@
+<%@ jet package="edu.incense.manager.java.emitters" imports="java.util.* edu.incense.manager.java.model.*" class="TaskTypeEmitter" %>
+<%ComponentStructure component = (ComponentStructure) argument;%>
+<%Date date = new Date();%>
+ /**
+  * This class must replace the one existing in InCense Data Package
+  * It's only purpose is to maintain the list of DataTypes available
+  * Modified <%= date.toString() %>
+  */
+
+package edu.incense.android.datatask.model;
+ 
+public enum TaskType {
+	NULL, 
+    AccelerometerSensor, 
+    GyroscopeSensor, 
+    AudioSensor, 
+    BluetoothSensor, 
+    GpsSensor, 
+    CallSensor, 
+    StateSensor, 
+    WifiScanSensor, 
+    WifiConnectionSensor, 
+    AccelerometerMeanFilter, 
+    DataSink, 
+    AudioSink, 
+    SessionTrigger, 
+    SurveyTrigger, 
+    Trigger,
+    ShakeFilter, 
+    BluetoothConnectionSensor,
+    NfcSensor,
+    WifiTimeConnectedFilter,
+    StopTrigger,
+    TimerSensor,
+    PowerConnectionSensor,
+    MovementFilter,
+    FalseTimerFilter,
+    MovementTimeFilter,
+    AccHighPassFilter,
+    AccVectorMagFilter,
+    StepsFilter,
+    CaloriesFilter,
+    AccRMSFilter,
+    AccActivityDetectorSMOFilter,
+    VAD16BitFilter,
+    NFCPublicTransportFilter,
+ <%=component.getComponentName()%>
+};

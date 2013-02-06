@@ -1,0 +1,59 @@
+<%@ jet package="edu.incense.manager.java.emitters" imports="java.util.* edu.incense.manager.java.model.*" class="DataEmitter"%>
+<%ComponentStructure component = (ComponentStructure) argument;%>
+<%byte i = 0;%>
+<%Date date = new Date();%>
+ /**
+  * New Data structure <%=component.getOutputName()%> generated automatically <%=date.toString()%>
+  */
+
+package edu.incense.android.datatask.data;
+
+import edu.incense.android.datatask.data.*;
+ 
+public class <%=component.getOutputName()%> extends Data {
+	/*Literals*/
+	<%for (i = 0; i<component.getDataLiterals().length; i++) {%>
+	public final static <%=component.getDataLiterals()[i][0]%> <%=component.getDataLiterals()[i][1]%> = <%=component.getDataLiterals()[i][2]%>;
+	<%}%>
+	/*Outputs*/
+	<%for (i = 0; i<component.getOutputs().length; i++) {%>
+	private	<%=component.getOutputs()[i][0]%> <%=component.getOutputs()[i][1]%>;
+	<%}%>
+	/*Constructors*/
+	<%if (component.getOutputs().length > 0){%>private <%=component.getOutputName()%> (DataType type,
+		<%=component.getOutputs()[0][0]%> <%=component.getOutputs()[0][1]%><%if (component.getOutputs().length > 1){%>,
+		<%for (i = 1; i<component.getOutputs().length - 1; i++) {%>
+		<%=component.getOutputs()[i][0]%> <%=component.getOutputs()[i][1]%>,<%}%>
+		<%=component.getOutputs()[i][0]%> <%=component.getOutputs()[i][1]%><%}%>) {
+		
+		super(type);
+		<%for (i = 0; i<component.getOutputs().length; i++) {%>
+		this.<%=component.getOutputs()[i][1]%> = <%=component.getOutputs()[i][1]%>;<%}%>
+	}
+		
+	public <%=component.getOutputName()%> (<%=component.getOutputs()[0][0]%> <%=component.getOutputs()[0][1]%><%if (component.getOutputs().length > 1){%>,
+		<%for (i = 1; i<component.getOutputs().length - 1; i++) {%>
+		<%=component.getOutputs()[i][0]%> <%=component.getOutputs()[i][1]%>,<%}%>
+		<%=component.getOutputs()[i][0]%> <%=component.getOutputs()[i][1]%><%}%>) {
+		
+		this (DataType.<%=component.getOutputType()%>, <%=component.getOutputs()[0][0]%> <%=component.getOutputs()[0][1]%><%if (component.getOutputs().length > 1){%>, <%for (i = 1; i<component.getOutputs().length - 1; i++) {%><%=component.getOutputs()[i][0]%> <%=component.getOutputs()[i][1]%>, <%}}%>);
+	}
+	<%} else {%>
+	private <%=component.getOutputName()%> (DataType type){
+		super(type);
+	}
+		
+	public <%=component.getOutputName()%> (){
+		this (DataType.<%=component.getOutputType()%>);
+	}
+	<%}%>
+	<%for (i = 0; i<component.getOutputs().length; i++) {%>
+	public <%=component.getOutputs()[i][0]%> get<%=component.getOutputs()[i][1].substring(0, 1).toUpperCase().concat(component.getOutputs()[i][1].substring(1, component.getOutputs()[i][1].length()))%>(){
+		return this.<%=component.getOutputs()[i][1]%>
+	}
+	
+	public void set<%=component.getOutputs()[i][1].substring(0, 1).toUpperCase().concat(component.getOutputs()[i][1].substring(1, component.getOutputs()[i][1].length()))%>(<%=component.getOutputs()[i][0]%> <%=component.getOutputs()[i][1]%>){
+		this.<%=component.getOutputs()[i][1]%> = <%=component.getOutputs()[i][1]%>;
+	}
+	<%}%>
+}

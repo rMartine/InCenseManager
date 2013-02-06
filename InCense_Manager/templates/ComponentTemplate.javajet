@@ -1,0 +1,43 @@
+<%@ jet package="edu.incense.manager.java.emitters" imports="java.util.* edu.incense.manager.java.model.*" class="DataComponentEmitter"%>
+<%ComponentStructure component = (ComponentStructure) argument;%>
+<%byte i = 0;%>
+<%Date date = new Date();%>
+ /**
+  * New Component <%=component.getComponentName()%> generated automatically <%=date.toString()%>
+  */
+
+package edu.incense.android.datatask.filter;
+
+import edu.incense.android.datatask.data.*;
+ 
+public class <%=component.getComponentName()%> extends DataFilter {
+	/*Section to declare configuration variables*/
+	<%for (i = 0; i<component.getConfigurationVariables().length; i++) {%>private <%=component.getConfigurationVariables()[i][0]%> <%=component.getConfigurationVariables()[i][1]%>;<%}%>
+	/*Section to declare  and initialize operation variables*/
+	<%for (i = 0; i<component.getOperationVariables().length; i++) {%>private <%=component.getOperationVariables()[i][0]%> <%=component.getOperationVariables()[i][1]%> = <%=component.getOperationVariables()[i][2]%>;<%}%>
+	
+	<%if (component.getConfigurationVariables().length > 0){%>public <%=component.getComponentName()%> (<%=component.getConfigurationVariables()[0][0]%> <%=component.getConfigurationVariables()[0][1]%><%if (component.getConfigurationVariables().length > 1){%>,<%for (i = 1; i<component.getConfigurationVariables().length - 1; i++) {%><%=component.getConfigurationVariables()[i][0]%> <%=component.getConfigurationVariables()[i][1]%>,<%}%><%=component.getConfigurationVariables()[i][0]%> <%=component.getConfigurationVariables()[i][1]%><%}%>) {
+		super();
+		setFilterName(this.getClass().getName());
+		<%for (i = 0; i<component.getConfigurationVariables().length; i++) {%>
+		this.<%=component.getConfigurationVariables()[i][1]%> = <%=component.getConfigurationVariables()[i][1]%>;
+		<%}%>
+	}
+	<%} else {%>public <%=component.getComponentName()%>() {
+		super();
+		setFilterName(this.getClass().getName());
+	}<%}%>
+	
+	@Override
+	public void start(){
+		super.start();
+	}
+	
+	@Override
+	protected void computeSingleData(Data data) {
+        Data newData = processData(data);
+        pushToOutputs(newData);
+    }
+    
+    <%=component.getProcessDataCode()%>
+}
